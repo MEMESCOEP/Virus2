@@ -3,17 +3,32 @@
 
 try:
     # IMPORTS
-    import os
-    import sys
-    from os import path
-    import threading
-    from playsound import playsound
-    import requests
-    import shutil
-    import time
-    from datetime import datetime
-    from tkinter import *
-    from random import randrange
+    try:
+        import os
+        import sys
+        from os import path
+        import threading
+        from playsound import playsound
+        import requests
+        import shutil
+        import time
+        from datetime import datetime
+        from tkinter import *
+        from random import randrange
+    except:
+        os.system("pip install " + "requests")
+        os.system("pip install " + "playsound==1.2.2")
+        import os
+        import sys
+        from os import path
+        import threading
+        from playsound import playsound
+        import requests
+        import shutil
+        import time
+        from datetime import datetime
+        from tkinter import *
+        from random import randrange
 
 
 
@@ -61,7 +76,7 @@ try:
                     playsound(pathtoaudio)
             except Exception as EX:
                 f = open('loglmao.txt', 'w')
-                f.write('An exceptional thing happed - %s' % EX)
+                f.write('An exceptional thing happed! >:((\n%s' % EX)
                 f.close()
                 #time.sleep(1000)
 
@@ -134,8 +149,15 @@ try:
     DownloadFiles()
     CopyFiles()
     System()
+    
+
+
+    
 except Exception as EX:
     print(EX)
     with open("loglmao.txt", "w") as f:
         f.writelines(EX)
     #time.sleep(1000)
+
+
+
