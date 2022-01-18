@@ -1,10 +1,5 @@
 # Andrew Maney 2022
 
-from concurrent.futures import thread
-
-from itsdangerous import exc
-
-
 while True:
     try:
         # IMPORTS
